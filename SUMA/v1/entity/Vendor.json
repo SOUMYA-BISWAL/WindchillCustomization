@@ -1,0 +1,17 @@
+{
+    "name":"Vendor",
+    "collectionName":"Vendor",
+	"includeInServiceDocument":true,
+    "type": "wcType",
+    "wcType":"com.ptc.windchill.suma.supplier.Vendor",
+    "description":"This Vendor extends Supplier",
+	"operations": "READ,CREATE,UPDATE,DELETE",
+    "parent":{
+        "name":"Supplier"
+    },
+    "inherits":[
+		{
+            "name": "softattributable"
+        } 
+	]
+}

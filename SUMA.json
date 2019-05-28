@@ -1,0 +1,11 @@
+{
+    "name":"PTC SUMA Domain",
+    "id":"SUMA",
+    "description":"PTC SUMA Domain",
+    "nameSpace":"PTC.SUMA",
+    "containerName":"Windchill",
+    "defaultVersion":"1",
+    "enabled":true,
+    "functions":[],
+    "actions":[]
+}

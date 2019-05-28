@@ -1,0 +1,32 @@
+{
+  "imports": [
+    { "name": "PTC", "version": "1"},
+    { "name": "PTC.DataAdmin", "version": "2"},
+    { "name": "PTC.DocMgmt", "version": "2"},
+    { "name": "PTC.PrincipalMgmt", "version": "2"},
+    { "name": "PTC.ProdMgmt", "version": "2"}
+  ],
+  "functions": [],
+  "actions": [
+	{
+			"name": "createSupplier",
+			"importName":"createSupplier",
+			"description": "Set a Variable on Work Item",
+			"parameters": [
+				{
+					"name": "orgName",
+					"type": "String",
+					"isCollection": false
+				},
+				{
+					"name": "supplierID",
+					"type": "String",
+					"isCollection": false
+				}
+			],
+			"returnType": {
+				"type":"Supplier"
+			}
+	}
+  ]
+}

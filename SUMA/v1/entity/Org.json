@@ -1,0 +1,55 @@
+{
+    "name": "Org",
+    "collectionName": "Org",
+    "type": "wcType",
+    "wcType": "wt.org.WTOrganization",
+    "description": "Organizations",
+    "operations": "READ",
+    "attributes": [
+        {
+            "name": "OrganizationName",
+            "internalName": "name",
+            "type": "String",
+            "readOnly": true
+        },{
+            "name": "PostalAddress",
+            "internalName": "location",
+            "type": "String",
+            "readOnly": true
+        }, {
+            "name": "WebSite",
+            "internalName": "webSite",
+            "type": "String",
+            "readOnly": true
+        }, {
+            "name": "InternetDomain",
+            "internalName": "internetDomain",
+            "type": "String",
+            "readOnly": true
+        }, {
+            "name": "ConferencingURL",
+            "internalName": "conferencingURL",
+            "type": "String",
+            "readOnly": true
+        }, {
+            "name": "ConferencingID",
+            "internalName": "conferencingIdentifier",
+            "type": "String",
+            "readOnly": true
+        }, {
+            "name": "BusinessClassification",
+            "internalName": "classification",
+            "type": "String",
+            "readOnly": true
+        }, {
+            "name": "OrganizationID",
+            "internalName": "organizationIdentifier",
+            "type": "PTC.PrincipalMgmt.OrgId",
+            "readOnly": true
+        }
+    ],
+    "inherits": [],
+    "navigations": [],
+    "functions": [],
+    "actions": []
+}

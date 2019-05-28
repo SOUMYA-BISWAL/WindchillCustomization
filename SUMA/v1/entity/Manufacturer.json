@@ -1,0 +1,17 @@
+{
+    "name": "Manufacturer",
+    "collectionName": "Manufacturer",
+	"includeInServiceDocument":true,
+    "type": "wcType",
+    "wcType": "com.ptc.windchill.suma.supplier.Manufacturer", 
+    "description": "Manufacturers",
+	"operations": "READ,CREATE,UPDATE,DELETE",
+    "parent": {
+        "name": "Supplier"
+    },
+    "inherits":[ 
+        {
+            "name": "softattributable"
+        }        
+    ]
+}

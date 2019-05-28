@@ -1,0 +1,39 @@
+{
+    "name": "Supplier",
+    "collectionName": "Supplier",
+    "type": "wcType",
+    "wcType": "com.ptc.windchill.suma.supplier.Supplier", 
+    "description": "Suppliers",
+    "operations": "READ,CREATE,UPDATE,DELETE",
+    "attributes": [
+		{
+            "name":"SupplierID",
+            "internalName":"SupplierID",
+            "type":"String"
+        },
+		{
+            "name": "suppOrgName",
+            "internalName": "name",
+            "type": "String",
+        }
+    ],
+    "inherits": [
+		{
+				"name": "subtypeable"
+		},
+		{
+            "name": "contextManaged"
+        }
+	],
+    "navigations": [
+		{
+			"name": "SupplierOrganization",
+			"target": "Org",
+			"type": "Org",
+			"isCollection": true,
+			"containsTarget": true
+		}
+	],
+    "functions": [],
+    "actions": []
+}
