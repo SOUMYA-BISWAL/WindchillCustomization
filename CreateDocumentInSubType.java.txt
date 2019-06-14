@@ -1,5 +1,13 @@
 package ext.pdmlink;
 
+/**
+ * @formatter:off
+ * Last Changed    ::                      $Date: 14-Jun-2019 07:12:54 (IST) $:
+ * Last Changed By ::                      $Author: Soumya $:
+ * Last Changed Rev::                      $Rev: 1 $:
+ * @formatter:on
+**/
+
 import com.ptc.core.foundation.type.server.impl.TypeHelper;
 import com.ptc.core.meta.common.impl.WCTypeIdentifier;
 
@@ -15,9 +23,23 @@ import wt.type.TypeDefinitionReference;
 import wt.type.TypedUtilityServiceHelper;
 import wt.util.WTException;
 
+/**
+ * 
+ * @author 40002294(Soumya Ranjan Biswal)
+ * Create WTDocument in subtype of WTDocument
+ *
+ */
+
 public class CreateDocumentInSubType implements RemoteAccess {
 
 	public static void main(String[] args) throws Exception   {
+		
+		/**
+		 * 
+		 * @rms (Remote Method Server) Start
+		 *
+		 */
+		
 		RemoteMethodServer rms= RemoteMethodServer.getDefault();
 		rms.setUserName("wcadmin");
 		rms.setPassword("wcadmin");
@@ -38,7 +60,12 @@ public class CreateDocumentInSubType implements RemoteAccess {
 		try {
 			System.out.println("Method Start");
 			
-			//Variable Declaration
+			/**
+			 * 
+			 * Variable Declaration
+			 *
+			 */
+			
 			String docNumber="Test1234";
 			String docName="Test1234";
 			String desription="this is custom documnet created by soumya";
@@ -53,18 +80,36 @@ public class CreateDocumentInSubType implements RemoteAccess {
 			WTDocument doc=null;
 			Folder folder=null;
 			
-			//Execution start
+			/**
+			 * 
+			 * Execution Start From Here
+			 *
+			 */
 			typeIdentifier = (WCTypeIdentifier) TypeHelper.getTypeIdentifier("WCTYPE|wt.doc.WTDocument|com.lnties.customSubtype");;
 			typeReference = TypedUtilityServiceHelper.service.getTypeDefinitionReference(typeIdentifier.getTypename());
 			containerRef = WTContainerHelper.service.getByPath(containerPath);
 			folder = FolderHelper.service.getFolder(folderPath,containerRef);
 			doc = WTDocument.newWTDocument(); 
+			
+			/**
+			 * 
+			 * Set WTDocument All Attribute 
+			 *
+			 */
+			
 			doc.setName(docName);
 			doc.setNumber(docNumber); 
 			doc.setDescription(desription);
 			doc.setContainerReference(containerRef);
 			doc.setTypeDefinitionReference(typeReference);
 			FolderHelper.assignLocation(doc, folder);
+			
+			/**
+			 * 
+			 * Store WTDocument In Windchill Database
+			 *
+			 */
+			
 			PersistenceHelper.manager.store(doc);
 			System.out.println("Method end");
 		}catch(WTException e) {
