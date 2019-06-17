@@ -124,6 +124,27 @@ public class MethodHelper
 		}
 		return numberList;
 	}
+//Create a Group inside a Particular Organization
+	public static File downloadContent()
+		{
+		String groupName = "TestAPIGroup";
+		String targetOrgName = "Demo Organization";
+		try {
+			Enumeration orgs = OrganizationServicesHelper.manager.findLikeOrganizations(WTOrganization.NAME, targetOrgName, 
+					((ExchangeContainer)WTContainerHelper.getExchangeRef().getContainer()).getContextProvider());
+			 WTOrganization targetOrg = null;
+			 if (orgs.hasMoreElements()){
+				  targetOrg = (WTOrganization) orgs.nextElement();
+				  OrgContainer org = WTContainerHelper.service.getOrgContainer(targetOrg);
+				  DirectoryContextProvider dcp = WTContainerHelper.service.getPublicContextProvider(org,WTGroup.class);
+				  WTGroup group = WTGroup.newWTGroup(groupName, dcp);
+				  group.setContainer(org);
+				  OrganizationServicesHelper.manager.createPrincipal(group);
+			  }
+		} catch (Exception e) {
+			  e.printStackTrace();
+		}
+	}
 
 	public static File downloadContent(WTDocument previousIter, String filePath)
 	{
