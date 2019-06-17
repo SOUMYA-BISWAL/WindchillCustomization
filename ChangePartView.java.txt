@@ -1,0 +1,124 @@
+package ext.pdmlink;
+
+/**
+ * @formatter:off
+ * Last Changed    ::                      $Date: 17-Jun-2019 06:36:54 (IST) $:
+ * Last Changed By ::                      $Author: Soumya $:
+ * Last Changed Rev::                      $Rev: 1 $:
+ * @formatter:on
+**/
+
+import wt.fc.PersistenceHelper;
+import wt.fc.QueryResult;
+import wt.method.RemoteAccess;
+import wt.method.RemoteMethodServer;
+import wt.part.WTPart;
+import wt.pds.StatementSpec;
+import wt.query.QuerySpec;
+import wt.query.SearchCondition;
+import wt.query.WhereExpression;
+import wt.vc.VersionControlHelper;
+import wt.vc.views.View;
+import wt.vc.views.ViewHelper;
+import wt.vc.views.ViewReference;
+import wt.vc.wip.WorkInProgressHelper;
+
+/**
+ * 
+ * @author 40002294(Soumya Ranjan Biswal)
+ * Change Part View Manufacture to Design
+ *
+ */
+
+public class ChangePartView implements RemoteAccess {
+
+	public static void main(String[] args) throws Exception   {
+		
+		/**
+		 * 
+		 * @rms (Remote Method Server) Start
+		 *
+		 */
+		
+		RemoteMethodServer rms= RemoteMethodServer.getDefault();
+		rms.setUserName("wcadmin");
+		rms.setPassword("wcadmin");
+		System.out.println("logged in Windchill");    
+		Class<?> argTypes[]={String.class};
+		Object argValues[]={"soumya"};
+		try {
+			System.out.println("Call to Create Document Method");
+			rms.invoke("createDocument", "ext.pdmlink.CreateDocument", null, argTypes, argValues); 
+		}catch (Exception e1) {
+			e1.printStackTrace();
+		}
+	}
+	
+
+	public static void createDocument(String str)throws Exception {
+		System.out.println("Method Calling");
+		try{
+			
+			/**
+			 * 
+			 * @ Variable Declaration
+			 *
+			 */
+			
+			String partNumber = "0000000022";
+			WTPart part,latestPart,workingCopy,updatePart;  
+			QuerySpec querySpec = null;
+			SearchCondition searchCondition = null;
+			QueryResult queryResult = null;
+			View view = null;
+			ViewReference viewRef = null;
+			
+			/**
+			 * 
+			 * @ Fetch Latest WTPart
+			 *
+			 */
+			
+			querySpec = new wt.query.QuerySpec(WTPart.class);
+			searchCondition = new SearchCondition(WTPart.class, "master>number", SearchCondition.EQUAL, partNumber, true);
+			querySpec.appendWhere((WhereExpression) searchCondition, new int[]{0});
+			queryResult = PersistenceHelper.manager.find((StatementSpec)querySpec);
+			part = (WTPart)queryResult.nextElement();
+			latestPart = (WTPart)VersionControlHelper.service.allVersionsOf(part.getMaster()).nextElement();
+			System.out.println("Latest Part Name:-> "+latestPart); 
+			
+			/**
+			 * 
+			 * @ CheckedOut WTPart
+			 *
+			 */
+			
+			workingCopy = (WTPart) WorkInProgressHelper.service.checkout(latestPart, WorkInProgressHelper.service.getCheckoutFolder(), "").getWorkingCopy();
+			System.out.println("latestPart CheckedOut");
+			
+			/**
+			 * 
+			 * @ Change View
+			 *
+			 */
+			
+			view = ViewHelper.service.getView("Manufacturing");//need to pass parameter Design either Manufacture
+			viewRef =ViewReference.newViewReference(view);
+			workingCopy.setView(viewRef);
+			System.out.println("Success full Updated");
+			
+			/**
+			 * 
+			 * @ Checked In And Store in WindChill DB
+			 *
+			 */
+			
+			updatePart = (WTPart) WorkInProgressHelper.service.checkin(workingCopy,"Part is Updated By Soumya");
+			updatePart = (WTPart) PersistenceHelper.manager.save(updatePart);
+		} catch (Exception e) {
+			System.out.println("Catch Execution");
+			e.printStackTrace();
+		}
+
+	}
+}
