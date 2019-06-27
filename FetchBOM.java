@@ -92,6 +92,7 @@ public class FetchBOM implements RemoteAccess {
 		 */
 		
 		if(queryResult.size()>0) {
+			Logger.print(" Below Part are Child Part of ---> "+part.getName());
 			iterationBOM(queryResult);
 		}
 	}
