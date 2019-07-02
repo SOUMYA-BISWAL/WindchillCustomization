@@ -13,8 +13,18 @@ import wt.query.QuerySpec;
 import wt.query.SearchCondition;
 import wt.query.WhereExpression;
 
+/**
+ * 
+ * @author 40002294
+ *
+ */
 public class FetchDescribedDocument implements RemoteAccess {
 
+	/**
+	 * 
+	 * @param args
+	 * @throws Exception
+	 */
 	public static void main(String[] args) throws Exception   {
 		RemoteMethodServer rms= RemoteMethodServer.getDefault(); 
 		rms.setUserName("wcadmin");
@@ -31,6 +41,10 @@ public class FetchDescribedDocument implements RemoteAccess {
 		}
 	} 
 	
+	/**
+	 * 
+	 * @param str
+	 */
 	public static void fetchDesWTDocumentFormPart(String str) {
 		System.out.println("Method Calling");
 		try {
@@ -57,6 +71,16 @@ public class FetchDescribedDocument implements RemoteAccess {
 				Logger.print("Described By Document Name...."+ document.getName());
 				Logger.print("Described By Document State ...."+ document.getState());
 			}
+			
+			//Below code for reference link
+           		 /*QueryResult qr = PersistenceHelper.manager.navigate(part,WTPartReferenceLink.REFERENCES_ROLE, wt.part.WTPartReferenceLink.class,false);
+			 
+			while (qr.hasMoreElements()){
+			WTPartReferenceLink link = (WTPartReferenceLink)qr.nextElement();
+			System.out.println("Found link ..........." + link);
+			WTDocumentMaster doc = link.getReferences();
+			System.out.println("Referenced By Document ...."+ doc.getNumber());
+			}*/
 			
 		}catch (Exception e) { 
 			System.out.println("Catch Execution");
