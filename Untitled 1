@@ -1,0 +1,37 @@
+
+--> create a new xconf file (comboBox.xconf) in codebase file and put below code
+	<Configuration targetFile="codebase/com/ptc/core/components/components.dataUtilities.properties">
+		<Service name="com.ptc.core.components.descriptor.DataUtility">
+			<Option
+			serviceClass="ext.custom.datautility.ComboBoxDataUtility" 
+			requestor="java.lang.Object"
+			selector="myCustomComboBox"
+			cardinality="duplicate"/>
+		</Service>
+	</Configuration>
+	--> Goto site .xconf file put below line
+		<ConfigurationRef xlink:href="codebase/comboBox.xconf"/>
+	--> Goto windchill shell run below command
+		xconfmanager -p
+		
+--> Goto your type select layout 
+	--> Goto action click edit layout
+	--> select your attribute
+	--> click pencil symbol
+	--> give selector (myCustomComboBox) value in dataUtilityId field
+	
+-->Crete a java file inside src
+	-->create package ext/custom/datautility
+	-->create java file ComboBoxDataUtility.java
+	-->extend com.ptc.core.components.factory.dataUtilities.DefaultDataUtility class 
+	-->Override the getDataValue() method
+		@Override
+		public Object getDataValue(String component_id, Object datum, ModelContext mc) throws WTException {
+			String result=super.getRawValue(datum,mc).toString();
+			// business rules
+			return(result);
+		}
+	-->Write your logic
+		
+-->RESTART Windchill
+		
