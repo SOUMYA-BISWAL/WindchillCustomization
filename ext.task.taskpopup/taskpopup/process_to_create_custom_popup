@@ -1,0 +1,15 @@
+
+	1-> Go to below path
+			<WINDCHILL-HOME>\codebase\netmarkets\jsp\customtemplates
+			
+	2-> paste completeButton.jsp file
+	
+	3-> write code as given below file name
+			TaskCompletePopup.java
+			
+	4-> create new template in windchill
+			Site > Template > copy default jsp and create new one
+			customTaskComplete.jsp 
+		
+	5-> go to activity robo in workflow template and template tab give your custom template name
+			customTaskComplete
